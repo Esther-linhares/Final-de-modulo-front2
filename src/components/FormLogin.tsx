@@ -79,16 +79,17 @@ const Form: React.FC<FormProps> = ({ mode, textButton }) => {
         });
         setTimeout(() => {
           setShowAlert({ display: 'none', success: true, text: '' });
-        }, 1000);
+        }, 4000);
         return;
       } 
-      
-      dispatch(loginAsyncThunk(user));
+
       setTimeout(() => {
+        dispatch(loginAsyncThunk(user));
         dispatch(getTaskAsyncThunk(user.email));
         dispatch(getUsersAsyncThunk());
-      }, 200);
+      }, 500);
       navigate('/notes');
+      
     } else {
       const newUser = {
         email,

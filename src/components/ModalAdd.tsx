@@ -43,7 +43,7 @@ const ModalInputs: React.FC<ModalInputsProps> = ({ openModal, actionCancel, acti
 
   const handleConfirm = () =>{
   
-    dispatch(taskCreateAsyncThunk({email: userLogged.email,
+    dispatch(taskCreateAsyncThunk({useremail: userLogged.email,
       title: task.title,
       description: task.description,})); 
     setTimeout(() => {

@@ -14,10 +14,10 @@ const SignUp: React.FC = () => {
         sm={4}
         md={7}
         sx={{
-          backgroundImage: 'url(/assets/img/notesImage.png)',
+          backgroundImage: 'url(/assets/img/imagemLogin.png)',
           backgroundPosition: 'center',
-          backgroundSize: 'cover',
-          backgroundRepeat: 'no-repete',
+          backgroundSize: '70%',
+          backgroundRepeat: 'no-repeat',
         }}
       />
       <Grid item xs={12} sm={8} md={5}>

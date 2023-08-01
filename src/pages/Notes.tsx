@@ -8,7 +8,6 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import Fab from '@mui/material/Fab';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import AddIcon from '@mui/icons-material/Add';
@@ -30,7 +29,6 @@ const Notes: React.FC = () => {
   const listTaks = useAppSelector(state => state.userLogged.userLogged.tasks);
   const dispatch = useAppDispatch();
   const [task, setTask] = useState({} as TTask);
-  const listarchives = listTaks.filter(t => t.archive === true);
   const [openEdit, setOpenEdit] = React.useState(false);
   const [openDelete, setOpenDelete] = React.useState(false);
   const [selectedTask, setSelectedTask] = useState({} as TTask);
@@ -46,9 +44,6 @@ const Notes: React.FC = () => {
   function page() {
     setArchive(!archive);
   }
-  useEffect(() => {
-    console.log(archive);
-  }, [archive]);
 
   const handleClose = () => {
     setOpenAdd(false);
@@ -91,7 +86,7 @@ const Notes: React.FC = () => {
           </Typography>
           <Grid item>
             {archive
-              ? listarchives.map(Task => (
+              ? listTaks.filter(t => t.archive === true).map(Task => (
                 <Grid item key={Task?.id}>
                   <Divider />
                   <ListItem

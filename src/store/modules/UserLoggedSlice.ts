@@ -27,7 +27,7 @@ interface filter {
   title: string,
 }
 interface newTask {
-  email: string,
+  useremail: string,
   title: string,
   description: string
 }
@@ -40,10 +40,7 @@ interface updateTask {
 
 
 export const loginAsyncThunk = createAsyncThunk('userLogin', async ({ email, password }: userLogin) => {
-  const response = await api.post('/login', {
-    email,
-    password
-  });
+  const response = await api.get(`users/login/${email}/${password}`);
   return response.data;
 });
 
@@ -60,15 +57,15 @@ export const userCreateAsyncThunk = createAsyncThunk(
 
 export const taskCreateAsyncThunk = createAsyncThunk(
   'taskCreate',
-  async ({ email, description, title }: newTask) => {
-    const response = await api.post(`/tasks/${email}`, {
+  async ({ useremail, description, title }: newTask) => {
+    const response = await api.post(`/tasks/${useremail}`, {
       title,
-      description
+      description,
+      useremail
     });
     return response.data;
   });
   
-
 export const getTaskAsyncThunk = createAsyncThunk(
   'getTask',
   async (email: string) => {
@@ -80,6 +77,14 @@ export const getFilterAsyncThunk = createAsyncThunk(
   'getFilter',
   async({email,title} : filter) => {
     const params = `?title=${title}`;
+    const response = await api.get(`tasks/${email}/filter${params}`);
+    return response.data;
+  });
+
+export const getArchiveAsyncThunk = createAsyncThunk(
+  'getFilter',
+  async(email : string) => {
+    const params = '?achive=true';
     const response = await api.get(`tasks/${email}/filter${params}`);
     return response.data;
   });
@@ -137,6 +142,5 @@ export const usuarioLogadoSlice = createSlice({
     },
   }
 });
-
 export default usuarioLogadoSlice.reducer;
 export const { logout } = usuarioLogadoSlice.actions;
